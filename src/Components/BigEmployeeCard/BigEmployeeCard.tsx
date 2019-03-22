@@ -9,12 +9,14 @@ import { StyledText, StyledTextFontSize } from '../Styled/Text/StyledText';
 import { StyledHr } from '../Styled/Elements/StyledHr';
 import { StyledCardSection } from '../Styled/Card/StyledCardSection';
 import { StyledButton } from '../Styled/Form/StyledButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { withRouter, RouteComponentProps } from 'react-router';
 
-interface IProps {
+interface IProps extends RouteComponentProps<any> {
 	employee: IEmployee;
 }
 
-export const BigEmployeeCard = (props: IProps) => {
+export const BigEmployeeCard = withRouter((props: IProps) => {
 	return (
 		<StyledCard marginTop={'200px'}>
 			<StyledFlexColumn height={theme.employeeBoxHeight}>
@@ -23,6 +25,10 @@ export const BigEmployeeCard = (props: IProps) => {
 				</StyledDiv>
 				<StyledText size={StyledTextFontSize.HUGE}>{props.employee.name}</StyledText>
 				<StyledText size={StyledTextFontSize.SMALL}>{props.employee.email}</StyledText>
+				<div>
+					<span onClick={() => props.history.push(`/customer-detail/${props.employee.email}/edit`)}><FontAwesomeIcon icon='pen'/></span>
+					<FontAwesomeIcon icon='times' />
+				</div>
 				<StyledHr />
 				<StyledCardSection>
 					<div>
@@ -47,4 +53,4 @@ export const BigEmployeeCard = (props: IProps) => {
 			</StyledFlexColumn>
 		</StyledCard>
 	);
-};
+});

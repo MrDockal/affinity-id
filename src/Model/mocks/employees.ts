@@ -36,7 +36,7 @@ export const employees: IEmployee[] = [
 		img: marryImg,
 		name: 'Marry Long',
 		address: '310 Brand road, Auckland',
-		email: 'andy@affinityid.co.nz',
+		email: 'marry@affinityid.co.nz',
 		role: IRole.Employee,
 		team: ITeam.Creative,
 	},

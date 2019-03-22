@@ -23,7 +23,7 @@ export class EmployeeListWithStore extends React.PureComponent<IProps> {
 				{
 					admins.map((admin: IEmployee) =>
 						<React.Fragment key={admin.email}>
-							<SmallEmployeeCard img={admin.img} name={admin.name} role={admin.role} team={admin.team} />
+							<SmallEmployeeCard img={admin.img} name={admin.name} role={admin.role} team={admin.team} email={admin.email} />
 							<StyledSpace/>
 						</React.Fragment>
 					)
@@ -32,7 +32,7 @@ export class EmployeeListWithStore extends React.PureComponent<IProps> {
 				{
 					employees.map((employee: IEmployee) =>
 						<React.Fragment key={employee.email}>
-							<SmallEmployeeCard img={employee.img} name={employee.name} role={employee.role} team={employee.team} />
+							<SmallEmployeeCard img={employee.img} name={employee.name} role={employee.role} team={employee.team} email={employee.email} />
 							<StyledSpace/>
 						</React.Fragment>
 					)

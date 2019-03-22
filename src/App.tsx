@@ -14,6 +14,8 @@ import { StyledSpace } from './Components/Styled/Elements/StyledSpace';
 import { EmployeeList } from './Containers/EmployeeList/EmployeeList';
 import { EmployeeForm } from './Components/EmployeeForm/EmployeeForm';
 import { EmployeeStore } from './Context/EmployeeStore';
+import { HashRouter, Switch, Route, RouteComponentProps, Link } from 'react-router-dom';
+import { IEmployee } from './Model/Employee/IEmployee';
 
 const GlobalStyle = createGlobalStyle<IThemeProps>`
 	html, body {
@@ -26,29 +28,43 @@ const GlobalStyle = createGlobalStyle<IThemeProps>`
 class App extends React.Component {
 	public render() {
 		return (
-			<ThemeProvider theme={theme}>
-				<EmployeeStore employees={employees}>
-					<StyledResponsiveContainer>
-						<GlobalStyle />
-						<StyledFlexRow>
-							<StyledAppColumns flexNumber={5}>
-								<StyledLogoImg src={logoImg} />
-								<StyledSpace/>
-								<StyledSearchInput type='text' placeholder='Search:' />
-								<StyledSpace/>
-								<EmployeeList/>
-							</StyledAppColumns>
-							<StyledAppColumns flexNumber={7}>
-								<StyledButton scheme={StyledButtonScheme.DARK}>
-									Create new employee
-								</StyledButton>
-								<BigEmployeeCard employee={employees[0]} />
-								<EmployeeForm editEmployee={employees[0]} onSubmit={() => false} />
-							</StyledAppColumns>
-						</StyledFlexRow>
-					</StyledResponsiveContainer>
-				</EmployeeStore>
-			</ThemeProvider>
+			<HashRouter>
+				<ThemeProvider theme={theme}>
+					<EmployeeStore employees={employees}>
+						<StyledResponsiveContainer>
+							<GlobalStyle />
+							<StyledFlexRow>
+								<StyledAppColumns flexNumber={5}>
+									<StyledLogoImg src={logoImg} />
+									<StyledSpace />
+									<StyledSearchInput type='text' placeholder='Search:' />
+									<StyledSpace />
+									<EmployeeList />
+								</StyledAppColumns>
+								<StyledAppColumns flexNumber={7}>
+									<Link to=''>
+										<StyledButton scheme={StyledButtonScheme.DARK}>
+											Create new employee
+										</StyledButton>
+									</Link>
+									<Switch>
+										<Route path='/customer-detail/:email/edit' render={(props: RouteComponentProps<{ email: string }>) =>
+											<EmployeeForm editEmployee={employees.find((employee: IEmployee) => employee.email === props.match.params.email)} onSubmit={() => false} />
+										} />
+										<Route path='/customer-detail/:email' render={(props: RouteComponentProps<{ email: string }>) => {
+											const employee = employees.find((em: IEmployee) => em.email === props.match.params.email);
+											return (
+												employee && <BigEmployeeCard employee={employee} />
+											);
+										}} />
+										<Route render={(props: RouteComponentProps<any>) => <EmployeeForm onSubmit={() => false} />} />
+									</Switch>
+								</StyledAppColumns>
+							</StyledFlexRow>
+						</StyledResponsiveContainer>
+					</EmployeeStore>
+				</ThemeProvider>
+			</HashRouter>
 		);
 	}
 }
