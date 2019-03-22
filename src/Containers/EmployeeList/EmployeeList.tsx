@@ -5,6 +5,7 @@ import { ColumnHeading } from 'src/Components/ColumnHeading/ColumnHeading';
 import { SmallEmployeeCard } from 'src/Components/SmallEmployeeCard/SmallEmployeeCard';
 import { StyledSpace } from 'src/Components/Styled/Elements/StyledSpace';
 import { withEmployeeStore, IEmployeeStoreProps } from 'src/Context/EmployeeStore';
+import { StyledSearchInput } from 'src/Components/Styled/Form/StyledSearchInput';
 
 export interface IOwnProps {
 	/** */
@@ -12,14 +13,44 @@ export interface IOwnProps {
 
 type IProps = IEmployeeStoreProps & IOwnProps;
 
-export class EmployeeListWithStore extends React.PureComponent<IProps> {
+interface IState {
+	searchValue: string;
+	nameSort: number;
+}
+
+export class EmployeeListWithStore extends React.PureComponent<IProps, IState> {
+
+	public state: IState = {
+		searchValue: '',
+		nameSort: 1,
+	};
 
 	public render() {
-		const admins = this.props.employeeStore.employees.filter((employee: IEmployee) => employee.role === IRole.Admin);
-		const employees = this.props.employeeStore.employees.filter((employee: IEmployee) => employee.role === IRole.Employee);
+		const filteredEmployeesBySearch = 
+			(!this.state.searchValue) ?
+				this.props.employeeStore.employees :
+				this.props.employeeStore.employees.filter((employee: IEmployee) => JSON.stringify(Object.values(employee)).toLowerCase().indexOf(this.state.searchValue.toLowerCase()) >= 0);
+
+		const allEmployees = filteredEmployeesBySearch.sort((em1: IEmployee, em2: IEmployee) => {
+			if (em1.name > em2.name) {
+				return this.state.nameSort;
+			}
+			else if (em1.name < em2.name) {
+				return -this.state.nameSort;
+			}
+			else {
+				return 0;
+			}
+		})
+		const admins = allEmployees.filter((employee: IEmployee) => employee.role === IRole.Admin);
+		const employees = allEmployees.filter((employee: IEmployee) => employee.role === IRole.Employee);
 		return (
 			<React.Fragment>
-				<ColumnHeading title={'Admin'} sortBy={'Name'} />
+				<StyledSearchInput type='text' placeholder='Search:' onChange={this.onSearchValueChange}/>
+				<StyledSpace />
+				{
+					admins.length > 0 && <ColumnHeading title={'Admin'} sortBy={'Name'} onClick={this.toggleSort} />
+				}
 				{
 					admins.map((admin: IEmployee) =>
 						<React.Fragment key={admin.email}>
@@ -28,7 +59,9 @@ export class EmployeeListWithStore extends React.PureComponent<IProps> {
 						</React.Fragment>
 					)
 				}
-				<ColumnHeading title={'Employee'} />
+				{
+					employees.length > 0 && <ColumnHeading title={'Employee'} />
+				}
 				{
 					employees.map((employee: IEmployee) =>
 						<React.Fragment key={employee.email}>
@@ -39,6 +72,18 @@ export class EmployeeListWithStore extends React.PureComponent<IProps> {
 				}
 			</React.Fragment>
 		);
+	}
+
+	private onSearchValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		this.setState({
+			searchValue: e.target.value,
+		});
+	}
+
+	private toggleSort = () => {
+		this.setState({
+			nameSort: -this.state.nameSort,
+		});
 	}
 }
 

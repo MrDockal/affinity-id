@@ -7,7 +7,6 @@ import { StyledFlexRow } from './Components/Styled/FlexLayout/StyledFlexRow';
 import { StyledAppColumns } from './Components/Styled/FlexLayout/StyledAppColumns';
 import { StyledLogoImg } from './Components/Styled/Img/StyledLogoImg';
 import logoImg from './assets/img/affinityid-logo.svg';
-import { StyledSearchInput } from './Components/Styled/Form/StyledSearchInput';
 import { StyledSpace } from './Components/Styled/Elements/StyledSpace';
 import { EmployeeList } from './Containers/EmployeeList/EmployeeList';
 import { EmployeeStore } from './Context/EmployeeStore';
@@ -33,8 +32,6 @@ class App extends React.Component {
 							<StyledFlexRow>
 								<StyledAppColumns flexNumber={5}>
 									<StyledLogoImg src={logoImg} />
-									<StyledSpace />
-									<StyledSearchInput type='text' placeholder='Search:' />
 									<StyledSpace />
 									<EmployeeList />
 								</StyledAppColumns>

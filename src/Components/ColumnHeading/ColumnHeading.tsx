@@ -5,6 +5,7 @@ import { StyledFlexRow } from '../Styled/FlexLayout/StyledFlexRow';
 interface IProps {
 	title: string;
 	sortBy?: string;
+	onClick?: () => void;
 }
 
 export const ColumnHeading = (props: IProps) => {
@@ -17,7 +18,7 @@ export const ColumnHeading = (props: IProps) => {
 				{
 					props.sortBy ?
 						<span>
-							Sort by: <span>{props.sortBy}</span>
+							Sort by: <span onClick={props.onClick && props.onClick} style={{fontWeight: 'bold'}}>{props.sortBy}</span>
 						</span> :
 						null
 				}
