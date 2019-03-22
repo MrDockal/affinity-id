@@ -18,7 +18,7 @@ interface IProps extends RouteComponentProps<any> {
 
 export const BigEmployeeCard = withRouter((props: IProps) => {
 	return (
-		<StyledCard marginTop={'200px'}>
+		<StyledCard>
 			<StyledFlexColumn height={theme.employeeBoxHeight}>
 				<StyledDiv height={`${StyledRoundedImgSize.BIG} / 2`}>
 					<StyledRoundedImg size={StyledRoundedImgSize.BIG} shiftTop={true} src={props.employee.img} />
