@@ -13,6 +13,7 @@ import { StyledSearchInput } from './Components/Styled/Form/StyledSearchInput';
 import { StyledSpace } from './Components/Styled/Elements/StyledSpace';
 import { EmployeeList } from './Containers/EmployeeList/EmployeeList';
 import { EmployeeForm } from './Components/EmployeeForm/EmployeeForm';
+import { EmployeeStore } from './Context/EmployeeStore';
 
 const GlobalStyle = createGlobalStyle<IThemeProps>`
 	html, body {
@@ -26,25 +27,27 @@ class App extends React.Component {
 	public render() {
 		return (
 			<ThemeProvider theme={theme}>
-				<StyledResponsiveContainer>
-					<GlobalStyle />
-					<StyledFlexRow>
-						<StyledAppColumns flexNumber={5}>
-							<StyledLogoImg src={logoImg} />
-							<StyledSpace/>
-							<StyledSearchInput type='text' placeholder='Search:' />
-							<StyledSpace/>
-							<EmployeeList employees={employees}/>
-						</StyledAppColumns>
-						<StyledAppColumns flexNumber={7}>
-							<StyledButton scheme={StyledButtonScheme.DARK}>
-								Create new employee
-							</StyledButton>
-							<BigEmployeeCard employee={employees[0]} />
-							<EmployeeForm editEmployee={employees[0]} onSubmit={() => false} />
-						</StyledAppColumns>
-					</StyledFlexRow>
-				</StyledResponsiveContainer>
+				<EmployeeStore employees={employees}>
+					<StyledResponsiveContainer>
+						<GlobalStyle />
+						<StyledFlexRow>
+							<StyledAppColumns flexNumber={5}>
+								<StyledLogoImg src={logoImg} />
+								<StyledSpace/>
+								<StyledSearchInput type='text' placeholder='Search:' />
+								<StyledSpace/>
+								<EmployeeList/>
+							</StyledAppColumns>
+							<StyledAppColumns flexNumber={7}>
+								<StyledButton scheme={StyledButtonScheme.DARK}>
+									Create new employee
+								</StyledButton>
+								<BigEmployeeCard employee={employees[0]} />
+								<EmployeeForm editEmployee={employees[0]} onSubmit={() => false} />
+							</StyledAppColumns>
+						</StyledFlexRow>
+					</StyledResponsiveContainer>
+				</EmployeeStore>
 			</ThemeProvider>
 		);
 	}

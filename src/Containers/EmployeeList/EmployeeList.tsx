@@ -4,16 +4,19 @@ import { IRole } from 'src/Model/Employee/IRole';
 import { ColumnHeading } from 'src/Components/ColumnHeading/ColumnHeading';
 import { SmallEmployeeCard } from 'src/Components/SmallEmployeeCard/SmallEmployeeCard';
 import { StyledSpace } from 'src/Components/Styled/Elements/StyledSpace';
+import { withEmployeeStore, IEmployeeStoreProps } from 'src/Context/EmployeeStore';
 
-interface IProps {
-	employees: IEmployee[];
+export interface IOwnProps {
+	/** */
 }
 
-export class EmployeeList extends React.PureComponent<IProps> {
+type IProps = IEmployeeStoreProps & IOwnProps;
+
+export class EmployeeListWithStore extends React.PureComponent<IProps> {
 
 	public render() {
-		const admins = this.props.employees.filter((employee: IEmployee) => employee.role === IRole.Admin);
-		const employees = this.props.employees.filter((employee: IEmployee) => employee.role === IRole.Employee);
+		const admins = this.props.employeeStore.employees.filter((employee: IEmployee) => employee.role === IRole.Admin);
+		const employees = this.props.employeeStore.employees.filter((employee: IEmployee) => employee.role === IRole.Employee);
 		return (
 			<React.Fragment>
 				<ColumnHeading title={'Admin'} sortBy={'Name'} />
@@ -38,3 +41,5 @@ export class EmployeeList extends React.PureComponent<IProps> {
 		);
 	}
 }
+
+export const EmployeeList = withEmployeeStore(EmployeeListWithStore);
