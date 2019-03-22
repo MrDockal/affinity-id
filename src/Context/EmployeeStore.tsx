@@ -40,11 +40,15 @@ export class EmployeeStore extends React.PureComponent<IProps, IState> {
 		)
 	}
 
-	private add = (employee: IEmployee) => {
+	private add = (employeeToAdd: IEmployee) => {
+		const exists = this.state.employees.find((employee: IEmployee) => employee.email.toLowerCase() === employeeToAdd.email.toLowerCase());
+		if (exists) {
+			throw new Error('This email already exists');
+		}
 		this.setState({
 			employees: [
 				...this.state.employees,
-				employee,
+				employeeToAdd,
 			],
 		});
 	}

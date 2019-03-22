@@ -20,7 +20,7 @@ interface IProps extends RouteComponentProps<any> {
 export const SmallEmployeeCard = withRouter((props: IProps) => {
 	const componentPathName = `/customer-detail/${props.email}`;
 	return (
-		<StyledCard active={props.location.pathname.indexOf(componentPathName) >= 0} onClick={() => props.history.push(componentPathName)}>
+		<StyledCard clickAble={true} active={props.location.pathname.indexOf(componentPathName) >= 0} onClick={() => props.history.push(componentPathName)}>
 			<StyledFlexCentered>
 				<StyledDiv style={{ paddingRight: theme.boxPadding }}>
 					<StyledRoundedImg src={props.img} size={StyledRoundedImgSize.SMALL} />

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyledDiv } from 'src/Components/Styled/Elements/StyledDiv';
-import { Switch, Route, RouteComponentProps } from 'react-router';
+import { Switch, Route, RouteComponentProps, withRouter } from 'react-router';
 import { EmployeeForm } from 'src/Components/EmployeeForm/EmployeeForm';
 import { withEmployeeStore, IEmployeeStoreProps } from 'src/Context/EmployeeStore';
 import { IEmployee } from 'src/Model/Employee/IEmployee';
@@ -8,7 +8,7 @@ import { BigEmployeeCard } from 'src/Components/BigEmployeeCard/BigEmployeeCard'
 import { Link } from 'react-router-dom';
 import { StyledButton, StyledButtonScheme } from 'src/Components/Styled/Form/StyledButton';
 
-interface IOwnProps {
+interface IOwnProps extends RouteComponentProps<any> {
 	/** */
 }
 
@@ -34,11 +34,29 @@ class EmployeeManagementWithStore extends React.PureComponent<IProps> {
 						<Route path='/customer-detail/:email' render={(props: RouteComponentProps<{ email: string }>) => {
 							const employee = this.props.employeeStore.employees.find((em: IEmployee) => em.email === props.match.params.email);
 							return (
-								employee && <BigEmployeeCard employee={employee} />
+								employee &&
+								<BigEmployeeCard
+									employee={employee}
+									delete={() => {
+										const confirmed = window.confirm('Do you really want to delete this employee?');
+										if (!confirmed) {
+											return;
+										}
+										this.props.employeeStore.remove(employee);
+										props.history.push(`/customer-detail/${employee.email}/edit`)
+									}}
+									edit={() => props.history.push(`/customer-detail/${employee.email}/edit`)}
+								/>
 							);
 						}} />
 						<Route render={(props: RouteComponentProps<any>) =>
-							<EmployeeForm onSubmit={(employee: IEmployee) => this.props.employeeStore.add(employee)} />}
+							<EmployeeForm onSubmit={(employee: IEmployee) => {
+								try {
+									this.props.employeeStore.add(employee)
+								} catch (e) {
+									alert(e.message);
+								}
+							}} />}
 						/>
 					</Switch>
 				</StyledDiv>
@@ -47,4 +65,4 @@ class EmployeeManagementWithStore extends React.PureComponent<IProps> {
 	}
 }
 
-export const EmployeeManagement = withEmployeeStore(EmployeeManagementWithStore);
+export const EmployeeManagement = withRouter(withEmployeeStore(EmployeeManagementWithStore));
