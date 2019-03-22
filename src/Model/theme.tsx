@@ -3,8 +3,11 @@ export const theme = {
 	backgroundColor: '#fafafa',
 	defaultFontSize: '15px',
 	fontColor: '#827e99',
+	darkFontColor: '#525252',
 	minorFontColor: '9b9b9b',
 	borderRadius: '15px',
+	boxPadding: '10px',
+	employeeBoxHeight: '340px',
 }
 
 export interface IThemeProps {

@@ -1,9 +1,9 @@
 import { IEmployee } from 'src/Model/Employee/IEmployee';
-import jackImg from '../img/jack.png';
-import victoriaImg from '../img/victoria.png';
-import donnaImg from '../img/donna.png';
-import marryImg from '../img/marry.png';
-import andyImg from '../img/andy.png';
+import jackImg from '../../assets/img/jack.png';
+import victoriaImg from '../../assets/img/victoria.png';
+import donnaImg from '../../assets/img/donna.png';
+import marryImg from '../../assets/img/mary.png';
+import andyImg from '../../assets/img/andy.png';
 import { IRole } from 'src/Model/Employee/IRole';
 import { ITeam } from 'src/Model/Team/ITeam';
 

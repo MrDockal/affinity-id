@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { IThemeProps } from 'src/Model/theme';
 
 export enum StyledTextFontSize {
+	HUGE,
 	BIG,
 	MEDIUM,
 	SMALL,
@@ -16,6 +17,12 @@ type IProps = IThemeProps & IOwnProps;
 export const StyledText = styled.div<IProps>`
 	${(props: IProps) => {
 		switch (props.size) {
+			case StyledTextFontSize.HUGE:
+				return `
+				color: ${props.theme.darkFontColor};
+				font-size: 1.5rem;
+				font-weight: 800;
+			`;
 			case StyledTextFontSize.BIG:
 				return `
 				font-size: 1rem;

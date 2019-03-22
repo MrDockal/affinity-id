@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { theme, IThemeProps } from './Model/theme';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { SmallEmployeeCard } from './Components/SmallEmployeeCard/SmallEmployeeCard';
-import { IRole } from './Model/Employee/IRole';
-import { ITeam } from './Model/Team/ITeam';
+import { employees } from './Model/mocks/employees';
+import { BigEmployeeCard } from './Components/BigEmployeeCard/BigEmployeeCard';
+import { StyledResponsiveContainer } from './Components/Styled/Responsive/StyledResponsiveContainer';
+import { StyledFlexRow } from './Components/Styled/FlexLayout/StyledFlexRow';
+import { IEmployee } from './Model/Employee/IEmployee';
+import { StyledFlexNumber } from './Components/Styled/FlexLayout/StyledFlexNumber';
 
 const GlobalStyle = createGlobalStyle<IThemeProps>`
 	html, body {
@@ -18,12 +21,19 @@ class App extends React.Component {
 	public render() {
 		return (
 			<ThemeProvider theme={theme}>
-				<div>
+				<StyledResponsiveContainer>
 					<GlobalStyle/>
-					<SmallEmployeeCard img='https://www.w3schools.com/howto/img_avatar2.png' name='Jan' role={IRole.Admin} team={ITeam.AdminFinance} />
-					<span>Hello</span>
-					<FontAwesomeIcon icon="igloo"/>
-				</div>
+					<StyledFlexRow>
+						<StyledFlexNumber>
+							{
+								employees.map((employee: IEmployee) =>
+									<SmallEmployeeCard key={employee.email} img={employee.img} name={employee.name} role={employee.role} team={employee.team} />
+								)
+							}
+						</StyledFlexNumber>
+						<BigEmployeeCard employee={employees[0]}/>
+					</StyledFlexRow>
+				</StyledResponsiveContainer>
 			</ThemeProvider>
 		);
 	}

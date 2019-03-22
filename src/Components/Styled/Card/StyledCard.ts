@@ -7,13 +7,12 @@ export interface IOwnProps {
 
 export type IProps = IOwnProps & IThemeProps;
 
-export const StyledSmallCard = styled.div<IProps>`
+export const StyledCard = styled.div<IProps>`
 	border-radius: ${(props: IProps) => props.theme.borderRadius};
 	${(props: IProps) => !props.active && 'box-shadow: 1px 5px 52px -13px rgba(0,0,0,0.55);'}
 	${(props: IProps) => !props.active && 'cursor: pointer;'}
-	padding: 10px;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+	padding: ${(props: IProps) => props.theme.boxPadding};
 	background-color: white;
+	flex: 1;
+	width: 80%;
 `;
