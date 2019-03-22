@@ -1,12 +1,13 @@
 import styled from 'styled-components';
-import { IThemeProps } from 'src/Model/theme';
+import { IThemeProps, theme } from 'src/Model/theme';
 
 export enum StyledButtonScheme {
 	DARK = 'DARK',
+	GREEN = 'GREEN',
 	DEFAULT = 'DEFAULT',
 }
 interface IOwnProps {
-	scheme?: StyledButtonScheme; 
+	scheme?: StyledButtonScheme;
 }
 
 type IProps = IOwnProps & IThemeProps;
@@ -20,7 +21,19 @@ export const StyledButton = styled.button<IProps>`
 	border-radius: ${(props: IProps) => props.theme.borderRadius}
 	width: 100%
 	padding: 20px 0;
-	background: ${(props: IProps) => props.scheme === StyledButtonScheme.DARK ? 'black' : props.theme.darkFontColor}
+	background: ${(props: IProps) => {
+		if (!props.scheme) {
+			return props.theme.darkFontColor;
+		}
+		switch (props.scheme) {
+			case StyledButtonScheme.DARK:
+				return 'black';
+			case StyledButtonScheme.GREEN:
+				return theme.greenColor;
+			default:
+				return props.theme.darkFontColor;
+		}
+	}}
 	&:focus {
 		outline: 0;
 	}

@@ -12,6 +12,7 @@ import { StyledButton, StyledButtonScheme } from './Components/Styled/Form/Style
 import { StyledSearchInput } from './Components/Styled/Form/StyledSearchInput';
 import { StyledSpace } from './Components/Styled/Elements/StyledSpace';
 import { EmployeeList } from './Containers/EmployeeList/EmployeeList';
+import { EmployeeForm } from './Components/EmployeeForm/EmployeeForm';
 
 const GlobalStyle = createGlobalStyle<IThemeProps>`
 	html, body {
@@ -40,6 +41,7 @@ class App extends React.Component {
 								Create new employee
 							</StyledButton>
 							<BigEmployeeCard employee={employees[0]} />
+							<EmployeeForm editEmployee={employees[0]} onSubmit={() => false} />
 						</StyledAppColumns>
 					</StyledFlexRow>
 				</StyledResponsiveContainer>
