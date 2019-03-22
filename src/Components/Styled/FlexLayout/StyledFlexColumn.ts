@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 interface IOwnProps {
 	height?: string;
+	marginTop?: string;
 }
 
 export const StyledFlexColumn = styled.div<IOwnProps>`

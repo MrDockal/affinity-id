@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledResponsiveContainer = styled.div`
-	margin: 0 300px;
+	margin: auto;
+	width: 1200px;
+	margin-top: 50px;
 `;

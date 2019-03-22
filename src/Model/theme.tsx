@@ -1,10 +1,10 @@
 export const theme = {
 	fontFamily: 'arial',
 	backgroundColor: '#fafafa',
-	defaultFontSize: '15px',
+	defaultFontSize: '18px',
 	fontColor: '#827e99',
 	darkFontColor: '#525252',
-	minorFontColor: '9b9b9b',
+	minorFontColor: '#9b9b9b',
 	borderRadius: '15px',
 	boxPadding: '10px',
 	employeeBoxHeight: '340px',

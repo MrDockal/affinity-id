@@ -8,7 +8,7 @@ import { StyledRoundedImgSize, StyledRoundedImg } from '../Styled/Img/StyledRoun
 import { StyledText, StyledTextFontSize } from '../Styled/Text/StyledText';
 import { StyledHr } from '../Styled/Elements/StyledHr';
 import { StyledCardSection } from '../Styled/Card/StyledCardSection';
-import { StyledButton } from '../Styled/Button/StyledButton';
+import { StyledButton } from '../Styled/Form/StyledButton';
 
 interface IProps {
 	employee: IEmployee;
@@ -16,7 +16,7 @@ interface IProps {
 
 export const BigEmployeeCard = (props: IProps) => {
 	return (
-		<StyledCard>
+		<StyledCard marginTop={'200px'}>
 			<StyledFlexColumn height={theme.employeeBoxHeight}>
 				<StyledDiv height={`${StyledRoundedImgSize.BIG} / 2`}>
 					<StyledRoundedImg size={StyledRoundedImgSize.BIG} shiftTop={true} src={props.employee.img} />

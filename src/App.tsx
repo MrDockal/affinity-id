@@ -1,13 +1,17 @@
 import * as React from 'react';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { theme, IThemeProps } from './Model/theme';
-import { SmallEmployeeCard } from './Components/SmallEmployeeCard/SmallEmployeeCard';
 import { employees } from './Model/mocks/employees';
 import { BigEmployeeCard } from './Components/BigEmployeeCard/BigEmployeeCard';
 import { StyledResponsiveContainer } from './Components/Styled/Responsive/StyledResponsiveContainer';
 import { StyledFlexRow } from './Components/Styled/FlexLayout/StyledFlexRow';
-import { IEmployee } from './Model/Employee/IEmployee';
-import { StyledFlexNumber } from './Components/Styled/FlexLayout/StyledFlexNumber';
+import { StyledAppColumns } from './Components/Styled/FlexLayout/StyledAppColumns';
+import { StyledLogoImg } from './Components/Styled/Img/StyledLogoImg';
+import logoImg from './assets/img/affinityid-logo.svg';
+import { StyledButton, StyledButtonScheme } from './Components/Styled/Form/StyledButton';
+import { StyledSearchInput } from './Components/Styled/Form/StyledSearchInput';
+import { StyledSpace } from './Components/Styled/Elements/StyledSpace';
+import { EmployeeList } from './Containers/EmployeeList/EmployeeList';
 
 const GlobalStyle = createGlobalStyle<IThemeProps>`
 	html, body {
@@ -22,16 +26,21 @@ class App extends React.Component {
 		return (
 			<ThemeProvider theme={theme}>
 				<StyledResponsiveContainer>
-					<GlobalStyle/>
+					<GlobalStyle />
 					<StyledFlexRow>
-						<StyledFlexNumber>
-							{
-								employees.map((employee: IEmployee) =>
-									<SmallEmployeeCard key={employee.email} img={employee.img} name={employee.name} role={employee.role} team={employee.team} />
-								)
-							}
-						</StyledFlexNumber>
-						<BigEmployeeCard employee={employees[0]}/>
+						<StyledAppColumns flexNumber={5}>
+							<StyledLogoImg src={logoImg} />
+							<StyledSpace/>
+							<StyledSearchInput type='text' placeholder='Search:' />
+							<StyledSpace/>
+							<EmployeeList employees={employees}/>
+						</StyledAppColumns>
+						<StyledAppColumns flexNumber={7}>
+							<StyledButton scheme={StyledButtonScheme.DARK}>
+								Create new employee
+							</StyledButton>
+							<BigEmployeeCard employee={employees[0]} />
+						</StyledAppColumns>
 					</StyledFlexRow>
 				</StyledResponsiveContainer>
 			</ThemeProvider>

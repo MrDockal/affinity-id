@@ -4,6 +4,7 @@ interface IProps {
 	flexNumber?: number;
 }
 
-export const StyledFlexNumber = styled.div<IProps>`
+export const StyledAppColumns = styled.div<IProps>`
 	flex: ${(props: IProps) => props.flexNumber || 1};
+	padding: 0 40px;
 `;

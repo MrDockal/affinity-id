@@ -2,7 +2,7 @@ import * as React from 'react';
 import { IRole } from 'src/Model/Employee/IRole';
 import { ITeam } from 'src/Model/Team/ITeam';
 import { StyledCard } from '../Styled/Card/StyledCard';
-import { StyledFlexRow } from '../Styled/FlexLayout/StyledFlexRow';
+import { StyledFlexCentered } from '../Styled/FlexLayout/StyledFlexRow';
 import { StyledDiv } from '../Styled/Elements/StyledDiv';
 import { StyledRoundedImg, StyledRoundedImgSize } from '../Styled/Img/StyledRoundedImg';
 import { StyledText, StyledTextFontSize } from '../Styled/Text/StyledText';
@@ -18,7 +18,7 @@ interface IProps {
 export const SmallEmployeeCard = (props: IProps) => {
 	return (
 		<StyledCard>
-			<StyledFlexRow>
+			<StyledFlexCentered>
 				<StyledDiv style={{paddingRight: theme.boxPadding}}>
 					<StyledRoundedImg src={props.img} size={StyledRoundedImgSize.SMALL}/>
 				</StyledDiv>
@@ -27,7 +27,7 @@ export const SmallEmployeeCard = (props: IProps) => {
 					<StyledText>{props.role}</StyledText>
 					<StyledText size={StyledTextFontSize.SMALL}>{props.team}</StyledText>
 				</div>
-			</StyledFlexRow>
+			</StyledFlexCentered>
 		</StyledCard>
 	);
 };
