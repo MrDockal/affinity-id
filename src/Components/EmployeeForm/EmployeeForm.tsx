@@ -10,7 +10,7 @@ import { StyledFormSelect } from '../Styled/Form/StyledFormSelect';
 
 interface IProps {
 	editEmployee?: IEmployee;
-	onSubmit(employee: IEmployee): void;
+	onSubmit(employee: IEmployee): boolean | void;
 }
 
 interface IState {
@@ -33,9 +33,7 @@ export class EmployeeForm extends React.PureComponent<IProps, IState> {
 
 	public componentDidUpdate(prevProps: IProps) {
 		if (prevProps.editEmployee && prevProps.editEmployee.email && !this.props.editEmployee) {
-			this.setState({
-				employee: employeeDefaults,
-			});
+			this.resetDefaultState();
 		}
 	}
 
@@ -44,6 +42,15 @@ export class EmployeeForm extends React.PureComponent<IProps, IState> {
 		return (
 			<StyledCard>
 				<form onSubmit={this.handleSubmit}>
+					{
+						!editing &&
+						<StyledFormGroup>
+							<div>
+								<label htmlFor='img'>Profile</label>
+							</div>
+							<StyledFormInput onChange={this.handleImgInputChange} id='img' name='img' type='file' accept="image/*" required={true} />
+						</StyledFormGroup>
+					}
 					<StyledFormGroup>
 						<div>
 							<label htmlFor='name'>Name</label>
@@ -96,11 +103,33 @@ export class EmployeeForm extends React.PureComponent<IProps, IState> {
 		);
 	}
 
+	private resetDefaultState() {
+		this.setState({
+			employee: employeeDefaults,
+		});
+	}
+
 	private handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const target = event.target;
 		const value = target.value;
 		const name = target.name;
-	
+
+		this.setState({
+			employee: {
+				...this.state.employee,
+				[name]: value,
+			}
+		});
+	}
+
+	private handleImgInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const target = event.target;
+		if (!event.target.files) {
+			return;
+		}
+		const value = URL.createObjectURL(event.target.files[0]);
+		const name = target.name;
+
 		this.setState({
 			employee: {
 				...this.state.employee,
@@ -111,6 +140,9 @@ export class EmployeeForm extends React.PureComponent<IProps, IState> {
 
 	private handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		this.props.onSubmit(this.state.employee as any);
+		const success = this.props.onSubmit(this.state.employee as any);
+		if (!!success) {
+			this.resetDefaultState();
+		}
 	}
 }

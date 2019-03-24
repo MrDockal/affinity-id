@@ -3,7 +3,6 @@ import { IRole } from 'src/Model/Employee/IRole';
 import { ITeam } from 'src/Model/Team/ITeam';
 import { StyledCard } from '../Styled/Card/StyledCard';
 import { StyledFlexCentered } from '../Styled/FlexLayout/StyledFlexRow';
-import { StyledDiv } from '../Styled/Elements/StyledDiv';
 import { StyledRoundedImg, StyledRoundedImgSize } from '../Styled/Img/StyledRoundedImg';
 import { StyledText, StyledTextFontSize } from '../Styled/Text/StyledText';
 import { theme } from 'src/Model/theme';
@@ -22,9 +21,7 @@ export const SmallEmployeeCard = withRouter((props: IProps) => {
 	return (
 		<StyledCard clickAble={true} active={props.location.pathname.indexOf(componentPathName) >= 0} onClick={() => props.history.push(componentPathName)}>
 			<StyledFlexCentered>
-				<StyledDiv style={{ paddingRight: theme.boxPadding }}>
-					<StyledRoundedImg src={props.img} size={StyledRoundedImgSize.SMALL} />
-				</StyledDiv>
+				<StyledRoundedImg src={props.img} size={StyledRoundedImgSize.SMALL} style={{ marginRight: theme.boxPadding }} />
 				<div>
 					<StyledText size={StyledTextFontSize.BIG}>{props.name}</StyledText>
 					<StyledText>{props.role}</StyledText>

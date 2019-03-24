@@ -52,9 +52,11 @@ class EmployeeManagementWithStore extends React.PureComponent<IProps> {
 						<Route render={(props: RouteComponentProps<any>) =>
 							<EmployeeForm onSubmit={(employee: IEmployee) => {
 								try {
-									this.props.employeeStore.add(employee)
+									this.props.employeeStore.add(employee);
+									return true;
 								} catch (e) {
 									alert(e.message);
+									return false;
 								}
 							}} />}
 						/>

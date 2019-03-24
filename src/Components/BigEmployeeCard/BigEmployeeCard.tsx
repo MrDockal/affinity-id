@@ -10,6 +10,7 @@ import { StyledHr } from '../Styled/Elements/StyledHr';
 import { StyledCardSection } from '../Styled/Card/StyledCardSection';
 import { StyledButton } from '../Styled/Form/StyledButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { StyledCircleIcon } from '../Styled/Icon/StyledCircleIcon';
 
 interface IProps {
 	employee: IEmployee;
@@ -26,10 +27,10 @@ export const BigEmployeeCard = (props: IProps) => {
 				</StyledDiv>
 				<StyledText size={StyledTextFontSize.HUGE}>{props.employee.name}</StyledText>
 				<StyledText size={StyledTextFontSize.SMALL}>{props.employee.email}</StyledText>
-				<div>
-					<span onClick={props.edit}><FontAwesomeIcon icon='pen'/></span>
-					<span onClick={props.delete}><FontAwesomeIcon icon='times' /></span>
-				</div>
+				<StyledCardSection style={{justifyContent: 'space-evenly'}}>
+					<StyledCircleIcon onClick={props.edit}><FontAwesomeIcon icon='pen'/></StyledCircleIcon>
+					<StyledCircleIcon onClick={props.delete}><FontAwesomeIcon icon='times' /></StyledCircleIcon>
+				</StyledCardSection>
 				<StyledHr />
 				<StyledCardSection>
 					<div>
