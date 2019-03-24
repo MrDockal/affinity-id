@@ -7,7 +7,7 @@ export const theme = {
 	minorFontColor: '#9b9b9b',
 	borderRadius: '15px',
 	boxPadding: '10px',
-	employeeBoxHeight: '340px',
+	employeeBoxHeight: '500px',
 	greenColor: '#5b9149',
 }
 

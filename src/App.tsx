@@ -12,9 +12,12 @@ import { EmployeeManagement } from './Containers/EmployeeManagement/EmployeeMana
 
 const GlobalStyle = createGlobalStyle<IThemeProps>`
 	html, body {
-		background-color: ${(props: IThemeProps) => props.theme.backgroundColor};
-		color: ${(props: IThemeProps) => props.theme.fontColor};
-		font-size: ${(props: IThemeProps) => props.theme.defaultFontSize};
+		background-color: ${(props: IThemeProps) => props.theme.backgroundColor} !important;
+		color: ${(props: IThemeProps) => props.theme.fontColor} !important;
+		font-size: ${(props: IThemeProps) => props.theme.defaultFontSize} !important;
+	}
+	.container {
+		margin-top: 40px;
 	}
 `;
 
