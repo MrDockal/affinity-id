@@ -2,9 +2,6 @@ import * as React from 'react';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { theme, IThemeProps } from './Model/theme';
 import { employees } from './Model/mocks/employees';
-import { StyledResponsiveContainer } from './Components/Styled/Responsive/StyledResponsiveContainer';
-import { StyledFlexRow } from './Components/Styled/FlexLayout/StyledFlexRow';
-import { StyledAppColumns } from './Components/Styled/FlexLayout/StyledAppColumns';
 import { StyledLogoImg } from './Components/Styled/Img/StyledLogoImg';
 import logoImg from './assets/img/affinityid-logo.svg';
 import { StyledSpace } from './Components/Styled/Elements/StyledSpace';
@@ -27,19 +24,19 @@ class App extends React.Component {
 			<HashRouter>
 				<ThemeProvider theme={theme}>
 					<EmployeeStore employees={employees}>
-						<StyledResponsiveContainer>
+						<div className='container'>
 							<GlobalStyle />
-							<StyledFlexRow>
-								<StyledAppColumns flexNumber={5}>
+							<div className='row'>
+								<div className='col-md-5'>
 									<StyledLogoImg src={logoImg} />
 									<StyledSpace />
 									<EmployeeList />
-								</StyledAppColumns>
-								<StyledAppColumns flexNumber={7}>
+								</div>
+								<div className='offset-md-1 col-md-6'>
 									<EmployeeManagement/>
-								</StyledAppColumns>
-							</StyledFlexRow>
-						</StyledResponsiveContainer>
+								</div>
+							</div>
+						</div>
 					</EmployeeStore>
 				</ThemeProvider>
 			</HashRouter>
